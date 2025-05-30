@@ -1,0 +1,445 @@
+{
+	"Depth First Search (Graph)": {
+	"prefix": "dfs_graph",
+	"body": [
+		"void dfs(int node) {",
+		"    vis[node] = true;",
+		"    for(int &i : adj[node]) {",
+		"        if(vis[i]) continue;",
+		"        dfs(i);",
+		"    }",
+		"}"
+	],
+	"description": "Depth First Search (Graph)"
+	},
+
+	"Depth First Search (Tree)": {
+	"prefix": "dfs_tree",
+	"body": [
+		"void dfs(int node, int parent = 0) {",
+		"  for(int &child : adj[node]) {",
+		"     if(child == parent) continue;",
+		"      ",
+		"  }",
+		"}"
+	],
+	"description": "Depth First Search (Tree)"
+	},
+
+	"Breadth First Search": {
+	"prefix": "bfs",
+	"body": [
+		"queue<int> bfs;",
+		"bfs.push(STARTING_VERTEX);",
+		"while(!bfs.empty()) {",
+		"  int cur = bfs.front();",
+		"  for(int &i : adj[cur]) {",
+		"    bfs.push(i);",
+		"  }",
+		"}"
+	],
+	"description": "Breadth First Search"
+	},
+
+	"Greatest Common Divisor": {
+	"prefix": "gcd",
+	"body": [
+		"int gcd(int a, int b) {",
+		"    return (b ? gcd(b, a % b) : a);",
+		"}"
+	],
+	"description": "Greatest Common Divisor"
+	},
+
+	"Least Common Multiple": {
+	"prefix": "lcm",
+	"body": [
+		"inline int lcm(int a, int b) {",
+		"  return a * b / gcd(a, b);",
+		"}"
+	],
+	"description": "Least Common Multiple"
+	},
+
+	"Sieve of Eratosthenes": {
+	"prefix": "soe",
+	"body": [
+		"vector<bool> isprime(S + 1, true);",
+		"for(int i = 2; i * i < S; i++) {",
+		"  if(isprime[i]) {",
+		"    for(int j = i * i; j <= S; j += i) {",
+		"       isprime[j] = false;",
+		"    }     ",
+		"  }",
+		"}"
+	],
+	"description": "Sieve of Eratosthenes"
+	},
+
+	"Inversion Count (OOP)": {
+	"prefix": "inversion_oop",
+	"body": [
+		"class Inversion {",
+		"  private:",
+		"    vector<int> arr;",
+		"    ",
+		"    int countMerge(int l, int mid, int r) {",
+		"        int n1 = mid - l + 1, n2 =  r - mid;",
+		"        vector<int> larr(n1), rarr(n2);",
+		"",
+		"        for (int i = 0; i < n1; i++) larr[i] = arr[l + i];",
+		"        for (int i = 0; i < n2; i++) rarr[i] = arr[mid + 1 + i];",
+		"",
+		"        int sum, i, j, k = l;",
+		"        sum = i = j = 0;",
+		"",
+		"        while(i < n1 && j < n2) {",
+		"            if(larr[i] <= rarr[j]) {",
+		"                arr[k++] = larr[i++];",
+		"            } else {",
+		"                arr[k++] = rarr[j++];",
+		"                sum += (n1 - i);",
+		"            }",
+		"        }",
+		"",
+		"        while(i < n1) arr[k++] = larr[i++];",
+		"        while(j < n2) arr[k++] = rarr[j++];",
+		"",
+		"        return sum;",
+		"    }",
+		"    int countInversions(int l, int r) {",
+		"        int sum = 0;",
+		"        if (l < r) {",
+		"            int mid = l + (r - l) / 2;",
+		"            sum += countInversions(l, mid);",
+		"            sum += countInversions(mid + 1, r);",
+		"            sum += countMerge(l, mid, r);",
+		"        }",
+		"        return sum;",
+		"    }",
+		"  ",
+		"  public:",
+		"    Inversion(const vector<int> &inputArr) : arr(inputArr) {}",
+		"",
+		"    int count() {",
+		"        return (arr.empty() ? 0 : countInversions(0, arr.size() - 1));",
+		"    }",
+		"    const vector<int> &array() const {",
+		"        return arr;",
+		"    }",
+		"};"
+	],
+	"description": "Inversion Count (OOP)"
+	},
+
+	"Disjoint Set Union (OOP)": {
+	"prefix": "dsu_oop",
+	"body": [
+		"class disjoint_set { // 1'idxd",
+		"  private:",
+		"    vector<int> parent;",
+		"    vector<int> size;",
+		"",
+		"  public:",
+		"    int union_count;",
+		"    disjoint_set(int size) : parent(size), size(size, 1), union_count(size) {",
+		"      for(int i = 1; i <= size; i++) { ",
+		"          parent[i] = i; ",
+		"      }",
+		"    }",
+		"    int find(int root) { ",
+		"      if(root == parent[root])",
+		"          return root;",
+		"      return parent[root] = find(parent[root]);",
+		"    }",
+		"    bool unite(int ra, int rb) {",
+		"      ra = find(ra);",
+		"      rb = find(rb);",
+		"      if(ra == rb) return false;",
+		"",
+		"      if (size[ra] < size[rb]) swap(ra, rb); ",
+		"",
+		"      size[ra] += size[rb];",
+		"      parent[rb] = ra;",
+		"      union_count--;",
+		"      return true;",
+		"    }",
+		"};"
+	],
+	"description": "Disjoint Set Union (OOP)"
+	},
+
+	"Disjoint Set Union (CP)": {
+	"prefix": "dsu_fast",
+	"body": [
+		"struct { // 1'idxd",
+		"    int union_count;",
+		"    vector<int> parent, size;",
+		"    void init(int input_size) {",
+		"        parent.resize(input_size + 1);",
+		"        size.resize(input_size + 1);",
+		"        union_count = input_size;",
+		"        for(int i = 1; i <= input_size; i++) ",
+		"            parent[i] = i;",
+		"    }",
+		"    int find(int root) {",
+		"        if(root == parent[root]) ",
+		"            return root;",
+		"        return parent[root] = find(parent[root]);",
+		"    }",
+		"    bool unite(int ra, int rb) {",
+		"        ra = find(ra);",
+		"        rb = find(rb);  ",
+		"        if(ra == rb) return false;",
+		"",
+		"        if(size[ra] < size[rb]) swap(ra, rb);",
+		"",
+		"        size[ra] += size[rb];",
+		"        parent[rb] = ra;",
+		"        union_count--;",
+		"        return true;",
+		"    }",
+		"} dsu;"
+	],
+	"description": "Disjoint Set Union (CP)"
+	},
+
+	"Custom Log": {
+	"prefix": "logf",
+	"body": [
+		"inline int logf(int a, int b) { // loga(b)",
+		"    return (log(b) / log(a));",
+		"}"
+	],
+	"description": "custom log"
+	},
+
+	"Binary Exponentation": {
+	"prefix": "power",
+	"body": [
+		"ll power(ll a, ll b) {",
+		"  ll temp = 1;",
+		"  for(; b; b >>= 1, a *= a) ",
+		"    if(b & 1) temp *= a;",
+		"  return temp;",
+		"}"
+	],
+	"description": "Binary Exponentation"
+	},
+
+	"Binary Exponentation Modulo": {
+	"prefix": "modpower",
+	"body": [
+		"int power(int a, int b) {",
+		"  int temp = 1;",
+		"  for(; b; b >>= 1, a = modmul(a, a)) ",
+		"    if(b & 1) temp = modmul(temp, a);",
+		"  return temp;",
+		"}"
+	],
+	"description": "Binary Exponentation Modulo"
+	},
+
+	"Modulo Sum": {
+	"prefix": "modsum",
+	"body": [
+		"inline int modsum(int a, int b) {",
+		"  return ((a % mod) + (b % mod)) % mod;",
+		"}"
+	],
+	"description": "modulo sum"
+	},
+
+	"Modulo Multiplication": {
+	"prefix": "modmul",
+	"body": [
+		"inline int modmul(int a, int b) {",
+		"  ll temp = ((ll)(a % mod) * (ll)(b % mod)) % mod;",
+		"  return (int)temp;",
+		"}"
+	],
+	"description": "Modulo Multiplication"
+	},
+
+	"Decimal to Biner": {
+	"prefix": "to_biner",
+	"body": [
+		"void to_biner(int x) {",
+		"    if(x) {",
+		"        to_biner(x >> 1);",
+		"        cout << (x & 1);",
+		"    }",
+		"}"
+	],
+	"description": "Decimal to Biner"
+	},
+
+	"Biner to Decimal": {
+	"prefix": "from_biner",
+	"body": [
+		"void from_biner(string s) {",
+		"    int sum = 0;",
+		"    for(int i = s.length() - 1; i >= 0; i--) ",
+		"        if(s[i] == '1') ",
+		"            sum += (1 << (s.length() - i - 1));",
+		"    cout << sum << el;",
+		"}"
+	],
+	"description": "Biner to Decimal"
+	},
+
+	"Fren Math Fuction": {
+	"prefix": "frenfunc",
+	"body": [
+		"class {",
+		"  public:",
+		"    inline int modsum(int a, int b) {",
+		"        return ((a % mod) + (b % mod)) % mod;",
+		"    }",
+		"    inline int modmul(int a, int b) {",
+		"    ll temp = ((ll)(a % mod) * (ll)(b % mod)) % mod;",
+		"    return (int)temp;",
+		"    }",
+		"    int modpower(int a, int b) {",
+		"        int temp = 1;",
+		"        for(; b; b >>= 1, a = modmul(a, a)) ",
+		"        if(b & 1) temp = modmul(temp, a);",
+		"        return temp;",
+		"    }",
+		"    ll power(ll a, ll b) {",
+		"        ll temp = 1;",
+		"        for(; b; b >>= 1, a *= a) ",
+		"        if(b & 1) temp *= a;",
+		"        return temp;",
+		"    }",
+		"    inline int logf(int a, int b) {",
+		"        return (log(b) / log(a));",
+		"    }",
+		"    int gcd(int a, int b) {",
+		"        return (b ? gcd(b, a % b) : a);",
+		"    }",
+		"    inline int lcm(int a, int b) {",
+		"        return a * b / gcd(a, b);",
+		"    }",
+		"",
+		"} fren;"
+	],
+	"description": "Fren Math Fuction"
+	},
+
+	"Policy-Based Data Structures": {
+	"prefix": "pbds",
+	"body": [
+		"#include <ext/pb_ds/assoc_container.hpp> ",
+		"#include <ext/pb_ds/tree_policy.hpp> ",
+		"typedef __gnu_pbds::tree<int, __gnu_pbds::null_type, less_equal<int>, __gnu_pbds::rb_tree_tag, ",
+		"__gnu_pbds::tree_order_statistics_node_update> ordered_multiset;",
+		"typedef __gnu_pbds::tree<int, __gnu_pbds::null_type, less<int>, __gnu_pbds::rb_tree_tag, ",
+		"__gnu_pbds::tree_order_statistics_node_update> ordered_set;"
+	],
+	"description": "Policy-Based Data Structures"
+	},
+
+	"Template cpp1 (Single Test Cases)": {
+	"prefix": "cpp1",
+	"body": [
+		"/**",
+		" *    author:  FrenH",
+		" *    created: $0.${CURRENT_MONTH}.${CURRENT_YEAR} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+		"**/",
+		"",
+		"#include <bits/stdc++.h>",
+		"using namespace std;",
+		"",
+		"//Shortcut",
+		"#define fp(i, l, r)     for(i = l; i < r; i++)",
+		"#define ms(x, y)        memset(x, y, sizeof(x))",
+		"#define all(x)          x.begin(), x.end()",
+		"#define sc              second",
+		"#define fr              first",
+		"#define el              '\\n'",
+		"",
+		"using dd                = double;",
+		"using ll                = long long;",
+		"using ull               = unsigned long long;",
+		"using pii               = pair<int, int>;",
+		"using pll               = pair<ll, ll>;",
+		"",
+		"// Global variabel",
+		"const int S = 1e5,",
+		"minf = INT_MIN, ",
+		"pinf = INT_MAX,",
+		"mod = 1e9 + 7;",
+		"",
+		"// Fren -> Not, Equal, AND, OR",
+		"// ASCII 0 = 48, A = 65, a = 97",
+		"",
+		"int main()",
+		"{",
+		"    std::ios::sync_with_stdio(false);",
+		"    std::cin.tie(nullptr); std::cout.tie(nullptr);",
+		"    ",
+		"    ",
+		"    ",
+		"    return 0;",
+		"}"
+	],
+	"description": "Template cpp1 (Single Test Cases)"
+	},
+
+	"Template cpp2 (Multiple Test Cases)": {
+		"prefix": "cpp2",
+		"body": [
+		"/**",
+		" *    author:  FrenH",
+		" *    created: $0.${CURRENT_MONTH}.${CURRENT_YEAR} ${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}",
+		"**/",
+		"",
+		"#include <bits/stdc++.h>",
+		"using namespace std;",
+		"",
+		"//Shortcut",
+		"#define fp(i, l, r)     for(i = l; i < r; i++)",
+		"#define ms(x, y)        memset(x, y, sizeof(x))",
+		"#define all(x)          x.begin(), x.end()",
+		"#define sc              second",
+		"#define fr              first",
+		"#define el              '\\n'",
+		"",
+		"using dd                = double;",
+		"using ll                = long long;",
+		"using ull               = unsigned long long;",
+		"using pii               = pair<int, int>;",
+		"using pll               = pair<ll, ll>;",
+		"",
+		"// Global variabel",
+		"const int S = 1e5,",
+		"minf = INT_MIN, ",
+		"pinf = INT_MAX,",
+		"mod = 1e9 + 7;",
+		"",
+		"// Fren -> Not, Equal, AND, OR",
+		"// ASCII 0 = 48, A = 65, a = 97",
+		"",
+		"void solve() {",
+		"    ",
+		"}",
+		"",
+		"int main()",
+		"{",
+		"    std::ios::sync_with_stdio(false);",
+		"    std::cin.tie(nullptr); std::cout.tie(nullptr);",
+		"    ",
+		"    int tc;",
+		"    for(cin >> tc; tc--;) {",
+		"        solve();",
+		"    }",
+		"    ",
+		"    return 0;",
+		"}"
+		],
+		"description": "Template cpp2 (Multiple Test Cases)"
+	},
+
+	
+}
