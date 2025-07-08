@@ -1,6 +1,6 @@
 {
 	"Depth First Search (Graph)": {
-	"prefix": "dfs_graph",
+	"prefix": "Fdfs_graph",
 	"body": [
 		"void dfs(int node) {",
 		"    vis[node] = true;",
@@ -14,7 +14,7 @@
 	},
 
 	"Depth First Search (Tree)": {
-	"prefix": "dfs_tree",
+	"prefix": "Fdfs_tree",
 	"body": [
 		"void dfs(int node, int parent = 0) {",
 		"  for(int &child : adj[node]) {",
@@ -27,7 +27,7 @@
 	},
 
 	"Breadth First Search": {
-	"prefix": "bfs",
+	"prefix": "Fbfs",
 	"body": [
 		"queue<int> bfs;",
 		"bfs.push(STARTING_VERTEX);",
@@ -42,7 +42,7 @@
 	},
 
 	"Greatest Common Divisor": {
-	"prefix": "gcd",
+	"prefix": "Fgcd",
 	"body": [
 		"int gcd(int a, int b) {",
 		"    return (b ? gcd(b, a % b) : a);",
@@ -52,7 +52,7 @@
 	},
 
 	"Least Common Multiple": {
-	"prefix": "lcm",
+	"prefix": "Flcm",
 	"body": [
 		"inline int lcm(int a, int b) {",
 		"  return a * b / gcd(a, b);",
@@ -62,7 +62,7 @@
 	},
 
 	"Sieve of Eratosthenes": {
-	"prefix": "soe",
+	"prefix": "Fsoe",
 	"body": [
 		"vector<bool> isprime(S + 1, true);",
 		"for(int i = 2; i * i < S; i++) {",
@@ -77,7 +77,7 @@
 	},
 
 	"Inversion Count (OOP)": {
-	"prefix": "inversion_oop",
+	"prefix": "Finversion_oop",
 	"body": [
 		"class Inversion {",
 		"  private:",
@@ -133,7 +133,7 @@
 	},
 
 	"Disjoint Set Union (OOP)": {
-	"prefix": "dsu_oop",
+	"prefix": "Fdsu_oop",
 	"body": [
 		"class disjoint_set { // 1'idxd",
 		"  private:",
@@ -170,7 +170,7 @@
 	},
 
 	"Disjoint Set Union (CP)": {
-	"prefix": "dsu_fast",
+	"prefix": "Fdsu_fast",
 	"body": [
 		"struct { // 1'idxd",
 		"    int union_count;",
@@ -205,7 +205,7 @@
 	},
 
 	"Custom Log": {
-	"prefix": "logf",
+	"prefix": "Flogf",
 	"body": [
 		"inline int logf(int a, int b) { // loga(b)",
 		"    return (log(b) / log(a));",
@@ -215,7 +215,7 @@
 	},
 
 	"Binary Exponentation": {
-	"prefix": "power",
+	"prefix": "Fpower",
 	"body": [
 		"ll power(ll a, ll b) {",
 		"  ll temp = 1;",
@@ -228,7 +228,7 @@
 	},
 
 	"Binary Exponentation Modulo": {
-	"prefix": "modpower",
+	"prefix": "Fmodpower",
 	"body": [
 		"int power(int a, int b) {",
 		"  int temp = 1;",
@@ -241,7 +241,7 @@
 	},
 
 	"Modulo Sum": {
-	"prefix": "modsum",
+	"prefix": "Fmodsum",
 	"body": [
 		"inline int modsum(int a, int b) {",
 		"  return ((a % mod) + (b % mod)) % mod;",
@@ -251,7 +251,7 @@
 	},
 
 	"Modulo Multiplication": {
-	"prefix": "modmul",
+	"prefix": "Fmodmul",
 	"body": [
 		"inline int modmul(int a, int b) {",
 		"  ll temp = ((ll)(a % mod) * (ll)(b % mod)) % mod;",
@@ -262,7 +262,7 @@
 	},
 
 	"Decimal to Biner": {
-	"prefix": "to_biner",
+	"prefix": "Fto_biner",
 	"body": [
 		"void to_biner(int x) {",
 		"    if(x) {",
@@ -275,7 +275,7 @@
 	},
 
 	"Biner to Decimal": {
-	"prefix": "from_biner",
+	"prefix": "Ffrom_biner",
 	"body": [
 		"void from_biner(string s) {",
 		"    int sum = 0;",
@@ -289,7 +289,7 @@
 	},
 
 	"Fren Math Fuction": {
-	"prefix": "frenfunc",
+	"prefix": "Ffrenfunc",
 	"body": [
 		"class {",
 		"  public:",
@@ -328,7 +328,7 @@
 	},
 
 	"Policy-Based Data Structures": {
-	"prefix": "pbds",
+	"prefix": "Fpbds",
 	"body": [
 		"#include <ext/pb_ds/assoc_container.hpp> ",
 		"#include <ext/pb_ds/tree_policy.hpp> ",
@@ -440,6 +440,4 @@
 		],
 		"description": "Template cpp2 (Multiple Test Cases)"
 	},
-
-	
 }
